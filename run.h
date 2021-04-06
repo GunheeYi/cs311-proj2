@@ -64,16 +64,7 @@
 #define TF(INST)		(RT(INST) & 0x1)
 
 #define TARGET(INST)		(INST)->r_t.target
-#define SET_TARGET(INST, VAL)	(INST)->r_t.target = (mem_addr)(VAL)
-
-#define ENCODING(INST)		(INST)->encoding
-#define SET_ENCODING(INST, VAL)	(INST)->encoding = (int32)(VAL)
-
-#define EXPR(INST)		(INST)->expr
-#define SET_EXPR(INST, VAL)	(INST)->expr = (imm_expr*)(VAL)
-
-#define SOURCE(INST)		(INST)->source_line
-#define SET_SOURCE(INST, VAL)	(INST)->source_line = (char *)(VAL)
+#define SET_TARGET(INST, VAL)	(INST)->r_t.target = (uint32_t)(VAL)
 
 /* Sign Extension */
 #define SIGN_EX(X) (((X) & 0x8000) ? ((X) | 0xffff0000) : (X))
