@@ -15,7 +15,7 @@
 int text_size;
 int data_size;
 
-char* substr(char* str, int s, int e) {
+char* substr(const char* str, int s, int e) {
 	char* new = (char*) malloc(sizeof(char)*(e-s+2));
 	strncpy(new, str+s, e-s+1);
 	new[e-s+1] = 0;
@@ -74,7 +74,7 @@ instruction parsing_instr(const char *buffer, const int index)
 void parsing_data(const char *buffer, const int index)
 {
 	/** Implement this function */
-	mem_write_32(MEM_REGIONS[0].size + index, fromBinary(buffer));
+	mem_write_32(MEM_REGIONS[1].start + index, fromBinary(buffer));
 }
 
 void print_parse_result()

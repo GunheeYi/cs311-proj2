@@ -48,7 +48,12 @@ uint32_t JumpAddr(int address) {
 /*                                                             */
 /***************************************************************/
 void process_instruction(){
-	/** Implement this function */
+    if(CURRENT_STATE.PC >= MEM_REGIONS[0].start + NUM_INST*4) {
+        RUN_BIT = FALSE;
+        return;
+    }
+    // printf("%x %x\n", CURRENT_STATE.PC, MEM_REGIONS[0].start + NUM_INST*4);
+
     instruction instr = *get_inst_info(CURRENT_STATE.PC);
     unsigned char rs = instr.r_t.r_i.rs;
     unsigned char rt = instr.r_t.r_i.rt;
@@ -59,6 +64,7 @@ void process_instruction(){
 
     char incrementPC = 1;
     
+    // printf("%d\n", instr.opcode);
 
     switch(instr.opcode) {
 	    //I format
