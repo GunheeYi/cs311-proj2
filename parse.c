@@ -28,8 +28,6 @@ instruction parsing_instr(const char *buffer, const int index)
 	/** Implement this function */
 	instr.opcode = fromBinary(substr(buffer, 0, 5));
 
-	printf("%s ", buffer);
-
 	switch(instr.opcode) {
 	    //I format
 	    case 0x9:		//ADDIU
@@ -64,9 +62,9 @@ instruction parsing_instr(const char *buffer, const int index)
 			// printf("%c %d %d\n", 'J', instr.opcode, instr.r_t.target);
 			break;
 
-	    // default:
-		// printf("Not available instruction\n");
-		// assert(0);
+	    default:
+			printf("Not available instruction\n");
+			assert(0);
 	}
 
 
