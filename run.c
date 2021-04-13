@@ -90,10 +90,16 @@ void process_instruction(){
             mem_write_32(CURRENT_STATE.REGS[rs] + SignExtImm(imm), CURRENT_STATE.REGS[rt]);
             break;
 	    case 0x4:		//BEQ
-            if(CURRENT_STATE.REGS[rs]==CURRENT_STATE.REGS[rt]) CURRENT_STATE.PC = CURRENT_STATE.PC + 4 + BranchAddr(imm);
+            if(CURRENT_STATE.REGS[rs]==CURRENT_STATE.REGS[rt]) {
+                CURRENT_STATE.PC = CURRENT_STATE.PC + 4 + BranchAddr(imm);
+                incrementPC = 0;
+            }
             break;
 	    case 0x5:		//BNE
-            if(CURRENT_STATE.REGS[rs]!=CURRENT_STATE.REGS[rt]) CURRENT_STATE.PC = CURRENT_STATE.PC + 4 + BranchAddr(imm);
+            if(CURRENT_STATE.REGS[rs]!=CURRENT_STATE.REGS[rt]) {
+                CURRENT_STATE.PC = CURRENT_STATE.PC + 4 + BranchAddr(imm);
+                incrementPC = 0;
+            }
 		    break;
 
     	    //R format
@@ -107,6 +113,7 @@ void process_instruction(){
                     break;
                 case 0x08: //JR
                     CURRENT_STATE.PC = CURRENT_STATE.REGS[rs];
+                    incrementPC = 0;
                     break;
                 case 0x27: //NOR
                     CURRENT_STATE.REGS[rd] = ~(CURRENT_STATE.REGS[rs]|CURRENT_STATE.REGS[rt]);
