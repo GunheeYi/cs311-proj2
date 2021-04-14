@@ -26,6 +26,8 @@ instruction parsing_instr(const char *buffer, const int index)
 {
     instruction instr;
 	/** Implement this function */
+	mem_write_32(MEM_REGIONS[0].start + index, fromBinary((char *)buffer));
+
 	instr.opcode = fromBinary(substr(buffer, 0, 5));
 
 	switch(instr.opcode) {
@@ -74,7 +76,7 @@ instruction parsing_instr(const char *buffer, const int index)
 void parsing_data(const char *buffer, const int index)
 {
 	/** Implement this function */
-	mem_write_32(MEM_REGIONS[1].start + index, fromBinary(buffer));
+	mem_write_32(MEM_REGIONS[1].start + index, fromBinary((char *)buffer));
 }
 
 void print_parse_result()
